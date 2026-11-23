@@ -108,11 +108,11 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 
 ### 3.4. Procesamiento: código Verilog de cada bloque
 
-En el circuito original esta lógica está integrada en [`ProyectoMYO_Pru1.v`](ProyectoMYO_Pru1.v).
+En el circuito original esta lógica está integrada en [`ProyectoMYO.v`](ProyectoMYO.v).
 
 #### 3.4.1. Sincronización y detección de pulsadores
 
-Archivo: [`Myo_Pulsadores.v`](Myo_Pulsadores.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
+Archivo: [`Entradas.v`](Entradas.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
 
 
 #### 3.4.2. Generador de pulsos de procesamiento
@@ -130,7 +130,7 @@ Archivo: [`Myo_Captura_Referencia.v`](Myo_Captura_Referencia.v). Registra `VlrMa
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
-Archivo: [`Myo_Calculo_Porcentaje.v`](Myo_Calculo_Porcentaje.v). Calcula la división entera:
+Archivo: [`Calculo_Porcentaje.v`](Myo_Calculo_Porcentaje.v). Calcula la división entera:
 
 ```text
 Porcentaje = (100 * DatoPrincipal) / VlrMax
@@ -140,7 +140,7 @@ Si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original 
 
 #### 3.4.6. Cálculo de segmentos para LCD y niveles del servo
 
-Archivo: [`Myo_Escalado_Segmentos.v`](Myo_Escalado_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
+Archivo: [`Escalado_Segmentos.v`](Division_Pasos_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
 
 ```text
 LCD16   = floor(min(Porcentaje, 100) * 16 / 100)   // 0 a 16
@@ -152,7 +152,7 @@ Cuando el porcentaje supera 255, `Prc` puede representar solo sus ocho bits bajo
 
 #### 3.4.7. Definición de estados del sistema
 
-Archivo: [`Myo_Clasificador_Estados.v`](Myo_Clasificador_Estados.v).
+Archivo: [`Clasificador_Estados.v`](Definicion_Estados_completo.v).
 
 | Estado | Señal | Condición digital |
 |---|---|---|
