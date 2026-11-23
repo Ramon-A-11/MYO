@@ -51,38 +51,28 @@ flowchart LR
 ```
 
 ```text
+
 MYO-FPGA/
 ├── README.md
-├── diagramas/
-│   └── arquitectura_digital.png
-├── documentacion/
-│   ├── propuesta_original.pdf
-│   ├── entradas_y_procesamiento.md
-│   ├── procesamiento_completo.md     # Código completo por bloque
-│   ├── procesamiento/               # 7 guías con código
-│   ├── guia_github_desde_cero.md
-│   ├── listado_modulos.md
-│   └── salidas/
-│       ├── 01_lcd.md
-│       ├── 02_servomotor.md
-│       ├── 03_bluetooth.md
-│       └── 04_buzzer.md
-├── rtl/
-│   ├── top/                      # Top original y top alternativo modular
-│   ├── entradas/                 # I2C ADS1115 y pines de drenador abierto
-│   ├── procesamiento/            # 7 bloques nuevos + operadores aritméticos
-│   ├── comunes/                  # Registros, contadores, multiplexores, etc.
-│   └── salidas/
-│       ├── 01_lcd/               # Control LCD + submódulos propios
-│       ├── 02_servomotor/        # PWM para servomotor
-│       ├── 03_bluetooth/         # UART + submódulos de paquetes
-│       └── 04_buzzer/            # Alarma acústica
-├── lista_fuentes_modular.f
-├── verificacion/
-│   └── verificar_integridad.py
-├── lista_fuentes.f
-├── Makefile
-└── respaldo_codigo_original.v
+├── MYO.png
+├── ProyectoMYO.v
+│
+├── ADS1115_I2C.v
+├── DIG_PinControl_BUS.v
+├── Entradas.v
+│
+├── Generador_de_Pulso.v
+├── Registro_Sensores.v
+├── Captura_de_Referencia.v
+├── Calculo_Porcentajes.v
+├── Division_Pasos_Segmentos.v
+├── Definicion_Estados_completo.v
+│
+├── LCD.v
+├── Servomotor.v
+├── Bluetooth.v
+└── Buzzer.v
+
 ```
 
 
