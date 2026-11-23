@@ -2,7 +2,7 @@
 
 ![Diagrama digital original de MYO](MYO.png)
 
-Este repositorio documenta la arquitectura digital del prototipo **MYO**, desarrollado para medir y visualizar de manera objetiva la actividad muscular durante ejercicios de rehabilitación. El código procede del archivo `ProyectoMYO_Pru1.v` exportado desde Digital y se presenta en **28 módulos Verilog originales separados**, manteniendo intacta cada definición, y una **versión modular alternativa** del procesamiento organizada en siete nuevos módulos para estudiar y compilar por bloques.
+Este repositorio documenta la arquitectura digital del prototipo **MYO**, desarrollado para medir y visualizar de manera objetiva la actividad muscular durante ejercicios de rehabilitación. El código procede del archivo `ProyectoMYO_Pru1.v` exportado desde Digital y se presenta en 28 módulos Verilog.
 
 ## 2. Introducción
 
