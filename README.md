@@ -117,20 +117,20 @@ Archivo: [`Entradas.v`](Entradas.v). Usa cinco flip-flops para sincronizar `Rese
 
 #### 3.4.2. Generador de pulsos de procesamiento
 
-Archivo: [`Myo_Generador_Pulso.v`](Myo_Generador_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). 
+Archivo: [`Generador_Pulso.v`](Generador_de_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). 
 
 #### 3.4.3. Registro y actualización de los sensores
 
-Archivo: [`Myo_Registro_Sensores.v`](Myo_Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
+Archivo: [`Registro_Sensores.v`](Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
 
 
 #### 3.4.4. Captura de la referencia muscular
 
-Archivo: [`Myo_Captura_Referencia.v`](Myo_Captura_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
+Archivo: [`Myo_Captura_Referencia.v`](Captura_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
-Archivo: [`Calculo_Porcentaje.v`](Myo_Calculo_Porcentaje.v). Calcula la división entera:
+Archivo: [`Calculo_Porcentaje.v`](alculo_Porcentaje.v). Calcula la división entera:
 
 ```text
 Porcentaje = (100 * DatoPrincipal) / VlrMax
