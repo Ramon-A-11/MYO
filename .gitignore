@@ -1,0 +1,25 @@
+# Salidas temporales de simulacion y herramientas HDL
+build/
+*.vvp
+*.vcd
+*.fst
+*.log
+*.bak
+*.swp
+*.swo
+*.tmp
+*.jou
+*.rpt
+
+# Salidas generadas por Quartus (no archivos fuente .qsf/.qpf)
+db/
+incremental_db/
+output_files/
+.qsys_edit/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
