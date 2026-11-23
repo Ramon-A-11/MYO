@@ -126,7 +126,7 @@ Archivo: [`Registro_Sensores.v`](Registro_Sensores.v). Guarda la última convers
 
 #### 3.4.4. Captura de la referencia muscular
 
-Archivo: [`Captura_Referencia.v`](Captura_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
+Archivo: [`Captura_Referencia.v`](Captura_de_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
