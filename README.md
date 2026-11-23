@@ -94,7 +94,7 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 
 - **A0 / `sensor1[11:0]`:** lectura del sensor muscular principal, convertida por el ADS1115.
 - **A1 / `sensor2[11:0]`:** lectura secundaria para la regla de posible compensación.
-- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C.v`](ADS1115_I2C.v).
+- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C`](ADS1115_I2C.v).
 - **Señales `Valid1` / `Valid2`:** indican cuándo se debe retener una conversión válida.
 - **Salida `ErrADS`:** indica un error notificado por el controlador I²C.
 
@@ -108,29 +108,29 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 
 ### 3.4. Procesamiento: código Verilog de cada bloque
 
-En el circuito original esta lógica está integrada en [`ProyectoMYO.v`](ProyectoMYO.v).
+En el circuito original esta lógica está integrada en [`ProyectoMYO`](ProyectoMYO.v).
 
 #### 3.4.1. Sincronización y detección de pulsadores
 
-Archivo: [`Entradas.v`](Entradas.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
+Archivo: [`Entradas`](Entradas.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
 
 
 #### 3.4.2. Generador de pulsos de procesamiento
 
-Archivo: [`Generador_Pulso.v`](Generador_de_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). 
+Archivo: [`Generador_Pulso`](Generador_de_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). 
 
 #### 3.4.3. Registro y actualización de los sensores
 
-Archivo: [`Registro_Sensores.v`](Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
+Archivo: [`Registro_Sensores`](Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
 
 
 #### 3.4.4. Captura de la referencia muscular
 
-Archivo: [`Captura_Referencia.v`](Captura_de_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
+Archivo: [`Captura_Referencia`](Captura_de_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
-Archivo: [`Calculo_Porcentaje.v`](Calculo_Porcentajes.v). Calcula la división entera:
+Archivo: [`Calculo_Porcentaje`](Calculo_Porcentajes.v). Calcula la división entera:
 
 ```text
 Porcentaje = (100 * DatoPrincipal) / VlrMax
@@ -140,7 +140,7 @@ Si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original 
 
 #### 3.4.6. Cálculo de segmentos para LCD y niveles del servo
 
-Archivo: [`Escalado_Segmentos.v`](Division_Pasos_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
+Archivo: [`Escalado_Segmentos`](Division_Pasos_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
 
 ```text
 LCD16   = floor(min(Porcentaje, 100) * 16 / 100)   // 0 a 16
@@ -152,7 +152,7 @@ Cuando el porcentaje supera 255, `Prc` puede representar solo sus ocho bits bajo
 
 #### 3.4.7. Definición de estados del sistema
 
-Archivo: [`Clasificador_Estados.v`](Definicion_Estados_completo.v).
+Archivo: [`Clasificador_Estados`](Definicion_Estados_completo.v).
 
 | Estado | Señal | Condición digital |
 |---|---|---|
