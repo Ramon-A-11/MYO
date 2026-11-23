@@ -1,5 +1,4 @@
-// Archivo separado de ProyectoMYO_Pru1.v para documentacion modular.
-// La definicion original del modulo se conserva sin modificar.
+
 module ProyectoMYO_Pru1 (
   input CLk,
   input Reset,
