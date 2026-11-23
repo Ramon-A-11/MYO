@@ -1,19 +1,4 @@
-// Archivo separado de ProyectoMYO_Pru1.v para documentacion modular.
-// La definicion original del modulo se conserva sin modificar.
-// Controlador I2C para ADS1115 - Cyclone IV / Digital (H. Neemann)
-// Reloj FPGA: 50 MHz. Bus I2C: aproximadamente 100 kHz.
-// ADS1115: ADDR a GND (direccion de 7 bits 0x48).
-// A0: sensor principal; A1: sensor secundario.
-// Configuracion: single-shot, PGA +/-4.096 V, 860 SPS, comparador deshabilitado.
-// Salidas: 12 bits positivos de las lecturas de 16 bits (bits [14:3]).
-//
-// IMPORTANTE: Los pines I2C son de drenador abierto.
-//   sda_drive_low=1 -> conducir SDA a 0; =0 -> liberar SDA.
-//   scl_drive_low=1 -> conducir SCL a 0; =0 -> liberar SCL.
-// El bus SDA se lee a traves de sda_in.
-// Integrar los buffers triestado fuera de este modulo, en el nivel superior.
-//
-// No conecta la senal Pulso de procesamiento de 1 ms: funciona independiente.
+
 module ADS1115_I2C (
     input  wire        clk,
     input  wire        rst,
