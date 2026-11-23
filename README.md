@@ -159,35 +159,15 @@ La compensación se detecta con un **umbral digital fijo**, no con un análisis 
 | `Buzz` | Salida | Alarma acústica |
 | `ErrADS` | Salida | Error reportado por ADS1115/I²C |
 
-### 3.7. Cómo revisar o compilar los módulos
 
-La estructura separada está preparada para herramientas compatibles con Verilog. Para comprobar su elaboración con **Icarus Verilog** (si está instalado):
 
-```bash
-make revisar
-```
-
-También se puede ejecutar directamente:
-
-```bash
-iverilog -g2012 -tnull -s ProyectoMYO_Pru1 -f lista_fuentes.f
-```
-
-Para comparar **los 28 cuerpos de módulos** contra el archivo generado originalmente (sin depender de un simulador):
-
-```bash
-python verificacion/verificar_integridad.py
-```
-
-La carpeta `rtl/` contiene los archivos que se deben añadir al proyecto FPGA. `respaldo_codigo_original.v` se conserva solo como respaldo y **no debe compilarse junto con los archivos separados** (tendría definiciones duplicadas). Este repositorio **no incluye** un archivo de asignación de pines `.qsf`, el proyecto Quartus `.qpf`, pruebas de banco ni una simulación integral validada en hardware.
-
-## 6. Conclusiones
+## 4. Conclusiones
 
 El proyecto MYO integra adquisición de dos canales por ADS1115/I²C, procesamiento digital en una FPGA y cuatro interfaces de retroalimentación: LCD, PWM para servo, UART para Bluetooth y buzzer. El diseño permite representar el esfuerzo como un porcentaje relativo a una referencia capturada y disparar alertas con criterios digitales definidos en el código.
 
 La separación en 28 archivos mejora la **trazabilidad, lectura y mantenimiento** sin modificar las definiciones originales. Para completar su validación hacen falta pruebas reales del sistema, calibración de sensores, elección de pines, pruebas de robustez y verificación experimental de los umbrales de esfuerzo y compensación. No se puede inferir eficacia terapéutica únicamente del código.
 
-## 7. Bibliografía
+## 5. Bibliografía
 
 [1] Easy Fisioterapia, “¿Cómo rehabilitar una lesión muscular?”, 14 de noviembre de 2024. [En línea](https://easyfisioterapia.com/blog/como-rehabilitar-una-lesion-muscular/).
 
