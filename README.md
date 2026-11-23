@@ -1,6 +1,6 @@
 # 1. MYO: Prototipo basado en electromiografía de superficie
 
-![Diagrama digital original de MYO](MYO.png)
+![Proyecto MYO](Fot_Myo.jpeg)
 
 Este repositorio documenta la arquitectura digital del prototipo **MYO**, desarrollado para medir y visualizar de manera objetiva la actividad muscular durante ejercicios de rehabilitación. El código procede del archivo `ProyectoMYO_Pru1.v` exportado desde Digital y se presenta en 28 módulos Verilog.
 
@@ -36,19 +36,7 @@ El propósito es aportar información cuantitativa complementaria a la evaluaci�
 
 ### 3.1. Vista general del flujo
 
-```mermaid
-flowchart LR
-    A[Canales sEMG A0 y A1] --> B[ADS1115 ADC]
-    B -->|I²C: SDA y SCL| C[FPGA Cyclone IV]
-    P[Pulsador de referencia] --> C
-    R[Reset] --> C
-    C --> D[Porcentaje de esfuerzo y estados]
-    D --> E[LCD 16x2]
-    D --> F[Servo PWM]
-    D --> G[Bluetooth por UART TX]
-    D --> H[Buzzer]
-    B --> I[Salida ErrADS]
-```
+![Diagrama de flujo](MYO.png)
 
 ```text
 
