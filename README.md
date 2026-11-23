@@ -168,19 +168,19 @@ Archivo: [`Myo_Clasificador_Estados.v`](Myo_Clasificador_Estados.v).
 
 #### A. Pantalla LCD
 
-[`rtl/salidas/01_lcd/`](01_lcd/) incluye el módulo `Mod_LCD_F` y sus componentes particulares. La salida de 4 bits utiliza los pines `E`, `Rs`, `Rw`, `D4`, `D5`, `D6`, `D7`. Consulta [submódulos LCD](documentacion/salidas/01_lcd.md).
+[`rtl/salidas/01_lcd/`](lc..) incluye el módulo `Mod_LCD_F` y sus componentes particulares. La salida de 4 bits utiliza los pines `E`, `Rs`, `Rw`, `D4`, `D5`, `D6`, `D7`.
 
 #### B. Servomotor
 
-[`rtl/salidas/02_servomotor/Cont_Srv_Con.v`](rtl/salidas/02_servomotor/Cont_Srv_Con.v) genera la señal `PWM` a partir de la magnitud limitada a 100 %, escalada a una entrada de 4 bits (0–15). El período del contador equivale a aproximadamente 20 ms a 50 MHz; se calcula un pulso en función del valor digital. Consulta [servo](documentacion/salidas/02_servomotor.md).
+[`rtl/salidas/02_servomotor/Cont_Srv_Con.v`](Cont_Srv_Con.v) genera la señal `PWM` a partir de la magnitud limitada a 100 %, escalada a una entrada de 4 bits (0–15). El período del contador equivale a aproximadamente 20 ms a 50 MHz; se calcula un pulso en función del valor digital. 
 
 #### C. Bluetooth
 
-[`rtl/salidas/03_bluetooth/`](rtl/salidas/03_bluetooth/) contiene `Mod_Blue`, `UART_COMPLETO`, `CONTROL_PAQUETES`, `TEMPORIZADOR_ENVIO`, `REGISTROS_TX`, `SEPARADOR_12_A_8` y `Decoder3`, **cada uno en su propio archivo**. La salida `UART` transmite datos de 12 bits en dos bytes, con un indicador de tipo de dato en el bit más alto del byte alto. La configuración del divisor corresponde aproximadamente a **9600 baudios** con un reloj de 50 MHz. El código implementa **TX UART**: no incluye emparejamiento Bluetooth ni software receptor. Consulta [Bluetooth y sus submódulos](documentacion/salidas/03_bluetooth.md).
+[`rtl/salidas/03_bluetooth/`](03_bluetooth/) contiene `Mod_Blue`, `UART_COMPLETO`, `CONTROL_PAQUETES`, `TEMPORIZADOR_ENVIO`, `REGISTROS_TX`, `SEPARADOR_12_A_8` y `Decoder3`. La salida `UART` transmite datos de 12 bits en dos bytes, con un indicador de tipo de dato en el bit más alto del byte alto. La configuración del divisor corresponde aproximadamente a **9600 baudios** con un reloj de 50 MHz. El código implementa **TX UART**.
 
 #### D. Buzzer
 
-[`rtl/salidas/04_buzzer/Mod_Buzzer.v`](rtl/salidas/04_buzzer/Mod_Buzzer.v) controla `Buzz` cuando existe condición de esfuerzo excedido (`EXC`) o compensación (`COM`). La salida es **activa en nivel bajo** según la asignación del código. Consulta [buzzer](documentacion/salidas/04_buzzer.md).
+[`rtl/salidas/04_buzzer/Mod_Buzzer.v`](Mod_Buzzer.v) controla `Buzz` cuando existe condición de esfuerzo excedido (`EXC`) o compensación (`COM`). La salida es **activa en nivel bajo** según la asignación del código.
 
 ### 3.6. Puertos principales
 
