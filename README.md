@@ -132,9 +132,11 @@ Archivo: [`Captura_Referencia`](Captura_de_Referencia.v). Registra `VlrMax` al p
 
 Archivo: [`Calculo_Porcentaje`](Calculo_Porcentajes.v). Calcula la división entera:
 
-```text
-Porcentaje = (100 * DatoPrincipal) / VlrMax
-```
+
+$$
+\text{Porcentaje} = \frac{100 \times \text{DatoPrincipal}}{\text{VlrMax}}
+$$
+
 
 Si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original se limita a sus 19 bits inferiores; la implementación mantiene este ancho.
 
@@ -142,11 +144,27 @@ Si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original 
 
 Archivo: [`Escalado_Segmentos`](Division_Pasos_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
 
-```text
-LCD16   = floor(min(Porcentaje, 100) * 16 / 100)   // 0 a 16
-Servo15 = floor(min(Porcentaje, 100) * 15 / 100)   // 0 a 15
-Prc     = Porcentaje[7:0]  // dato de 8 bits para LCD
-```
+
+### Escalado para las salidas
+
+**Segmentos de la pantalla LCD (0 a 16):**
+
+$$
+\text{LCD16} = \left\lfloor \frac{\min(\text{Porcentaje},100)\times16}{100} \right\rfloor
+$$
+
+**Escalado del servomotor (0 a 15):**
+
+$$
+\text{Servo15} = \left\lfloor \frac{\min(\text{Porcentaje},100)\times15}{100} \right\rfloor
+$$
+
+**Porcentaje enviado a la LCD (8 bits):**
+
+$$
+\text{Prc} = \text{Porcentaje} \bmod 256
+$$
+
 
 Cuando el porcentaje supera 255, `Prc` puede representar solo sus ocho bits bajos, igual que en el código original.
 
