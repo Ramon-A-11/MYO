@@ -210,7 +210,3 @@ La separación en 28 archivos originales y siete bloques de procesamiento adicio
 
 [2] M. Chmiel, “A Comprehensive Guide to Exercise Parameters in Physical Therapy”, Physitrack, 8 de mayo de 2025. [En línea](https://www.physitrack.com/insights/a-comprehensive-guide-to-exercise-parameters-in-physical-therapy).
 
-
----
-
-**[Guía paso a paso: publicar este repositorio en GitHub](documentacion/guia_github_desde_cero.md)** · **[Diagrama del circuito](diagramas/arquitectura_digital.png)** · **[Código original](respaldo_codigo_original.v)**
