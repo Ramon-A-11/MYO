@@ -1,6 +1,6 @@
 # 1. MYO: Prototipo basado en electromiografía de superficie
 
-![Diagrama digital original de MYO](diagramas/arquitectura_digital.png)
+![Diagrama digital original de MYO](MYO.png)
 
 Este repositorio documenta la arquitectura digital del prototipo **MYO**, desarrollado para medir y visualizar de manera objetiva la actividad muscular durante ejercicios de rehabilitación. El código procede del archivo `ProyectoMYO_Pru1.v` exportado desde Digital y se presenta en **28 módulos Verilog separados**, manteniendo intacto el contenido de cada definición de módulo.
 
