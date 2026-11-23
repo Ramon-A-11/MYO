@@ -193,7 +193,6 @@ La separación en 28 archivos mejora la **trazabilidad, lectura y mantenimiento*
 
 [2] M. Chmiel, “A Comprehensive Guide to Exercise Parameters in Physical Therapy”, Physitrack, 8 de mayo de 2025. [En línea](https://www.physitrack.com/insights/a-comprehensive-guide-to-exercise-parameters-in-physical-therapy).
 
-**Documento académico de origen:** [Propuesta de MYO (PDF)](documentacion/propuesta_original.pdf). **Advertencia antes de hacerlo público:** comprueba que los autores autoricen la publicación de la propuesta, sus nombres y direcciones de correo incluidas en el PDF.
 
 ---
 
