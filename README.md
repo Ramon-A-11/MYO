@@ -94,7 +94,7 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 
 - **A0 / `sensor1[11:0]`:** lectura del sensor muscular principal, convertida por el ADS1115.
 - **A1 / `sensor2[11:0]`:** lectura secundaria para la regla de posible compensación.
-- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C.v`](ADS1115_I2C.v) y el adaptador de pines [`DIG_PinControl_BUS.v`](DIG_PinControl_BUS.v).
+- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C.v`](ADS1115_I2C.v).
 - **Señales `Valid1` / `Valid2`:** indican cuándo se debe retener una conversión válida.
 - **Salida `ErrADS`:** indica un error notificado por el controlador I²C.
 
@@ -104,11 +104,6 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 - **`Reset`:** reinicio activo en alto que se sincroniza en dos flip-flops para generar `rst`, y borra la referencia almacenada.
 - **`Pulsador`:** sincroniza su flanco de subida para producir `BtnPul` y guardar la muestra principal como `VlrMax`.
 - **`CLk`:** señal de reloj FPGA, 50 MHz.
-
-```verilog
-// Núcleo del módulo Myo_Pulsadores.v:
-assign BtnPul = (pulso_ff2 & pulso_ff2_anterior_n) | rst;
-```
 
 **Código completo:** [sincronización de botones](rtl/procesamiento/Myo_Pulsadores.v) · [captura de referencia](rtl/procesamiento/Myo_Captura_Referencia.v) · [flip-flops compartidos](rtl/comunes/DIG_D_FF_1bit.v).
 
