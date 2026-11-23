@@ -94,11 +94,11 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 
 - **A0 / `sensor1[11:0]`:** lectura del sensor muscular principal, convertida por el ADS1115.
 - **A1 / `sensor2[11:0]`:** lectura secundaria para la regla de posible compensación.
-- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C.v`](rtl/entradas/ADS1115_I2C.v) y el adaptador de pines [`DIG_PinControl_BUS.v`](rtl/entradas/DIG_PinControl_BUS.v).
+- **SDA y SCL:** comunicación I²C controlada por [`ADS1115_I2C.v`](ADS1115_I2C.v) y el adaptador de pines [`DIG_PinControl_BUS.v`](rtl/entradas/DIG_PinControl_BUS.v).
 - **Señales `Valid1` / `Valid2`:** indican cuándo se debe retener una conversión válida.
 - **Salida `ErrADS`:** indica un error notificado por el controlador I²C.
 
-**Archivos completos de esta etapa:** [`ADS1115_I2C.v`](rtl/entradas/ADS1115_I2C.v), [`DIG_PinControl_BUS.v`](rtl/entradas/DIG_PinControl_BUS.v) y [registro digital de ambos sensores](rtl/procesamiento/Myo_Registro_Sensores.v).
+**Archivos completos de esta etapa:** [`ADS1115_I2C.v`](rtl/entradas/ADS1115_I2C.v), [`DIG_PinControl_BUS.v`](rtl/entradas/DIG_PinControl_BUS.v) y [registro digital de ambos sensores](Myo_Registro_Sensores.v).
 
 #### 3.3.2. Pulsador Reset y pulsador de referencia
 
