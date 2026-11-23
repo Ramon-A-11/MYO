@@ -1,5 +1,4 @@
-// Extraccion modular equivalente al bloque de pulsadores del top original.
-// Sincronizacion y deteccion de flanco; no incluye antirrebote.
+
 module Myo_Pulsadores (
     input wire clk,
     input wire Reset,
