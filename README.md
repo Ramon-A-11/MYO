@@ -85,8 +85,6 @@ MYO-FPGA/
 └── respaldo_codigo_original.v
 ```
 
-**Para consultar el código individual de cada salida**, abre sus carpetas o documentos:
-
 | Salida | Módulo principal | Descripción y código desglosado |
 |---|---|---|
 | LCD 16×2 (4 bits) | [`Mod_LCD_F.v`](rtl/salidas/01_lcd/Mod_LCD_F.v) | [LCD: archivos y submódulos](documentacion/salidas/01_lcd.md) |
