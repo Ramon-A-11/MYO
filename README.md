@@ -50,8 +50,7 @@ flowchart LR
     B --> I[Salida ErrADS]
 ```
 
-**Módulo superior:** [`ProyectoMYO_Pru1`](rtl/top/ProyectoMYO_Pru1.v). Integra el ADC, los registros de muestras, la temporización, el cálculo del porcentaje y las salidas. El procesamiento principal **está descrito dentro del archivo superior**: no se ha trasladado artificialmente a otro módulo para evitar modificar el diseño original.
-
+**Módulo superior:** [`ProyectoMYO_Pru1`](ProyectoMYO_Pru1.v). Integra el ADC, los registros de muestras, la temporización, el cálculo del porcentaje y las salidas. El procesamiento principal **está descrito dentro del archivo superior**.
 ### 3.2. Estructura de archivos
 
 ```text
