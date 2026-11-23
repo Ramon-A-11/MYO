@@ -105,82 +105,42 @@ Las entradas principales de MYO son **A0 y A1 (sensores sEMG)**, los botones dig
 - **`Pulsador`:** sincroniza su flanco de subida para producir `BtnPul` y guardar la muestra principal como `VlrMax`.
 - **`CLk`:** señal de reloj FPGA, 50 MHz.
 
-**Código completo:** [sincronización de botones](rtl/procesamiento/Myo_Pulsadores.v) · [captura de referencia](rtl/procesamiento/Myo_Captura_Referencia.v) · [flip-flops compartidos](rtl/comunes/DIG_D_FF_1bit.v).
-
-> I²C requiere resistencias de pull-up, las señales analógicas requieren acondicionamiento compatible con el ADC y los pulsadores no cuentan con antirrebote explícito en el código.
 
 ### 3.4. Procesamiento: código Verilog de cada bloque
 
-En el circuito original esta lógica está integrada en [`ProyectoMYO_Pru1.v`](rtl/top/ProyectoMYO_Pru1.v). Para entender y presentar el proyecto en GitHub se reorganizó **sin borrar el original** como siete módulos `.v` individuales, conectados en [`ProyectoMYO_Modular.v`](rtl/top/ProyectoMYO_Modular.v).
-
-**[Ver los siete módulos documentados con TODO su código Verilog](documentacion/procesamiento_completo.md)**.
+En el circuito original esta lógica está integrada en [`ProyectoMYO_Pru1.v`](ProyectoMYO_Pru1.v).
 
 #### 3.4.1. Sincronización y detección de pulsadores
 
-Archivo: [`Myo_Pulsadores.v`](rtl/procesamiento/Myo_Pulsadores.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
+Archivo: [`Myo_Pulsadores.v`](Myo_Pulsadores.v). Usa cinco flip-flops para sincronizar `Reset`, sincronizar `Pulsador` y detectar el flanco de subida. El reset también habilita el borrado de `VlrMax`.
 
-```verilog
-assign BtnPul = (pulso_ff2 & pulso_ff2_anterior_n) | rst;
-```
 
 #### 3.4.2. Generador de pulsos de procesamiento
 
-Archivo: [`Myo_Generador_Pulso.v`](rtl/procesamiento/Myo_Generador_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). Este dato corrige la documentación anterior que afirmaba 1 ms.
-
-```verilog
-DIG_Counter_Nbit #(.Bits(19)) contador (
-    .en(1'b1), .C(clk), .clr(rst | Pulso), .out(cuenta)
-);
-CompUnsigned #(.Bits(19)) fin_cuenta (
-    .a(cuenta), .b(19'd499999), .\= (Pulso)
-);
-```
+Archivo: [`Myo_Generador_Pulso.v`](Myo_Generador_Pulso.v). Con reloj de **50 MHz** y cuenta de `0` hasta `499999`, genera un pulso cada **10 ms** (100 Hz). 
 
 #### 3.4.3. Registro y actualización de los sensores
 
-Archivo: [`Myo_Registro_Sensores.v`](rtl/procesamiento/Myo_Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
+Archivo: [`Myo_Registro_Sensores.v`](Myo_Registro_Sensores.v). Guarda la última conversión de cada sensor con `Valid1`/`Valid2`; luego actualiza las muestras de procesamiento cuando aparece `Pulso`.
 
-```verilog
-DIG_Register_BUS #(.Bits(12)) reg_proceso_1 (
-    .D(muestra1_valida), .C(clk), .en(Pulso), .Q(DatoPrincipal)
-);
-DIG_Register_BUS #(.Bits(12)) reg_proceso_2 (
-    .D(muestra2_valida), .C(clk), .en(Pulso), .Q(DatComp)
-);
-```
 
 #### 3.4.4. Captura de la referencia muscular
 
-Archivo: [`Myo_Captura_Referencia.v`](rtl/procesamiento/Myo_Captura_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
-
-```verilog
-DIG_Register_BUS #(.Bits(12)) registro_referencia (
-    .D(valor_a_guardar), .C(clk), .en(BtnPul), .Q(VlrMax)
-);
-```
+Archivo: [`Myo_Captura_Referencia.v`](Myo_Captura_Referencia.v). Registra `VlrMax` al pulsar y guarda cero cuando `rst=1`.
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
-Archivo: [`Myo_Calculo_Porcentaje.v`](rtl/procesamiento/Myo_Calculo_Porcentaje.v). Calcula la división entera:
+Archivo: [`Myo_Calculo_Porcentaje.v`](Myo_Calculo_Porcentaje.v). Calcula la división entera:
 
 ```text
 Porcentaje = (100 * DatoPrincipal) / VlrMax
 ```
 
-```verilog
-DIG_Mul_unsigned #(.Bits(12)) multiplicacion (
-    .a(12'd100), .b(DatoPrincipal), .mul(producto)
-);
-Mod_div_19 division (
-    .a(numerador), .b(divisor), .q(Porcentaje)
-);
-```
-
-En el [módulo completo](rtl/procesamiento/Myo_Calculo_Porcentaje.v), si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original se limita a sus 19 bits inferiores; la implementación mantiene este ancho.
+Si `VlrMax=0`, se fuerza numerador a cero y divisor a uno. El producto original se limita a sus 19 bits inferiores; la implementación mantiene este ancho.
 
 #### 3.4.6. Cálculo de segmentos para LCD y niveles del servo
 
-Archivo: [`Myo_Escalado_Segmentos.v`](rtl/procesamiento/Myo_Escalado_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
+Archivo: [`Myo_Escalado_Segmentos.v`](Myo_Escalado_Segmentos.v). Se limita el porcentaje a 100 para los dos indicadores:
 
 ```text
 LCD16   = floor(min(Porcentaje, 100) * 16 / 100)   // 0 a 16
@@ -188,26 +148,11 @@ Servo15 = floor(min(Porcentaje, 100) * 15 / 100)   // 0 a 15
 Prc     = Porcentaje[7:0]  // dato de 8 bits para LCD
 ```
 
-```verilog
-assign saturar = (Porcentaje >= 19'd100);
-assign Prc = Porcentaje[7:0];
-assign LCD16 = nivel_lcd[4:0];
-assign Servo15 = nivel_servo[3:0];
-```
-
-Los productos y divisiones completos aparecen en el [archivo Verilog de segmentos](rtl/procesamiento/Myo_Escalado_Segmentos.v). Cuando el porcentaje supera 255, `Prc` puede representar solo sus ocho bits bajos, igual que en el código original.
+Cuando el porcentaje supera 255, `Prc` puede representar solo sus ocho bits bajos, igual que en el código original.
 
 #### 3.4.7. Definición de estados del sistema
 
-Archivo: [`Myo_Clasificador_Estados.v`](rtl/procesamiento/Myo_Clasificador_Estados.v).
-
-```verilog
-assign En_Nor = (VlrMax != 12'd0) && (Porcentaje < 19'd80);
-assign En_Pre = (Porcentaje >= 19'd80) && (Porcentaje < 19'd100);
-assign En_Lim = (Porcentaje == 19'd100);
-assign En_Exc = (Porcentaje > 19'd100);
-assign En_Com = (VlrMax != 12'd0) && (DatComp >= 12'd3000);
-```
+Archivo: [`Myo_Clasificador_Estados.v`](Myo_Clasificador_Estados.v).
 
 | Estado | Señal | Condición digital |
 |---|---|---|
@@ -217,34 +162,13 @@ assign En_Com = (VlrMax != 12'd0) && (DatComp >= 12'd3000);
 | Excedido | `En_Exc` | porcentaje >100 |
 | Posible compensación | `En_Com` | referencia válida y lectura secundaria ≥3000 |
 
-**Nota:** la compensación es un umbral digital fijo; su interpretación clínica requiere evaluación. `En_Com` puede coexistir con otro estado de esfuerzo.
-
-#### 3.4.8. Integración y compilación
-
-- **Diseño original, exactamente como se exportó:** [`rtl/top/ProyectoMYO_Pru1.v`](rtl/top/ProyectoMYO_Pru1.v), con [`lista_fuentes.f`](lista_fuentes.f).
-- **Diseño modular alternativo para documentación:** [`rtl/top/ProyectoMYO_Modular.v`](rtl/top/ProyectoMYO_Modular.v), con [`lista_fuentes_modular.f`](lista_fuentes_modular.f).
-
-```bash
-# Comparar que los 28 módulos originales permanezcan sin cambios:
-python3 verificacion/verificar_integridad.py
-
-# Compilar el top original (requiere Icarus Verilog):
-make revisar
-
-# Compilar el top modular alternativo (requiere Icarus Verilog):
-make revisar_modular
-
-# Probar porcentaje, estados y segmentos con banco de prueba:
-make probar_procesamiento
-```
-
-La versión modular requiere **verificación mediante simulación y pruebas en FPGA** antes de sustituir el top original. No se ha realizado validación en hardware.
+**Nota:** la compensación es un umbral digital fijo. `En_Com` puede coexistir con otro estado de esfuerzo.
 
 ### 3.5. Salidas: cada una con su propio código
 
 #### A. Pantalla LCD
 
-[`rtl/salidas/01_lcd/`](rtl/salidas/01_lcd/) incluye el módulo `Mod_LCD_F` y sus componentes particulares. La salida de 4 bits utiliza los pines `E`, `Rs`, `Rw`, `D4`, `D5`, `D6`, `D7`. Consulta [submódulos LCD](documentacion/salidas/01_lcd.md).
+[`rtl/salidas/01_lcd/`](01_lcd/) incluye el módulo `Mod_LCD_F` y sus componentes particulares. La salida de 4 bits utiliza los pines `E`, `Rs`, `Rw`, `D4`, `D5`, `D6`, `D7`. Consulta [submódulos LCD](documentacion/salidas/01_lcd.md).
 
 #### B. Servomotor
 
