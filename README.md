@@ -1,4 +1,4 @@
-# 1. MYO: Prototipo basado en electromiografía de superficie para personas en rehabilitación
+# 1. MYO: Prototipo basado en electromiografía de superficie
 
 ![Diagrama digital original de MYO](diagramas/arquitectura_digital.png)
 
