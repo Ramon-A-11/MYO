@@ -2,11 +2,7 @@
 
 ![Diagrama digital original de MYO](diagramas/arquitectura_digital.png)
 
-**Proyecto académico | FPGA Cyclone IV | Verilog | sEMG | ADS1115 | I²C | UART**
-
 Este repositorio documenta la arquitectura digital del prototipo **MYO**, desarrollado para medir y visualizar de manera objetiva la actividad muscular durante ejercicios de rehabilitación. El código procede del archivo `ProyectoMYO_Pru1.v` exportado desde Digital y se presenta en **28 módulos Verilog separados**, manteniendo intacto el contenido de cada definición de módulo.
-
-> **Alcance:** MYO es un prototipo académico en desarrollo. Los indicadores de esfuerzo y compensación son criterios implementados en el circuito, **no una evaluación clínica validada**. Se requieren calibración, ensayos y supervisión profesional antes de cualquier uso con pacientes.
 
 ## 2. Introducción
 
@@ -18,7 +14,7 @@ En fisioterapia, la intensidad de un ejercicio puede estimarse a partir de la pe
 
 MYO recibe señales analógicas de dos canales sEMG mediante un convertidor ADC **ADS1115**; una FPGA procesa las muestras, calcula un porcentaje de esfuerzo respecto a un valor de referencia capturado mediante pulsador y activa distintas salidas: **pantalla LCD 16×2, servomotor PWM, transmisión UART para Bluetooth y buzzer**.
 
-El canal secundario se utiliza en la lógica de **detección de posible compensación muscular**, que genera una indicación o alarma cuando se supera un umbral implementado. La propuesta contempla registrar datos de las sesiones; en este código se observa transmisión de muestras por UART, pero **no se incluye una aplicación o base de datos que almacene el historial**.
+El canal secundario se utiliza en la lógica de **detección de posible compensación muscular**, que genera una indicación o alarma cuando se supera un umbral implementado. La propuesta contempla registrar datos de las sesiones; en este código se observa transmisión de muestras por UART.
 
 ### 2.3. Objetivo general
 
