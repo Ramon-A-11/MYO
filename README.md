@@ -50,9 +50,6 @@ flowchart LR
     B --> I[Salida ErrADS]
 ```
 
-**Top original:** [`ProyectoMYO_Pru1.v`](rtl/top/ProyectoMYO_Pru1.v), conservado sin cambios. **Top modular de estudio:** [`ProyectoMYO_Modular.v`](rtl/top/ProyectoMYO_Modular.v), con el procesamiento extraído por módulos. Ambas alternativas aparecen en listas de fuentes distintas para su compilación.
-### 3.2. Estructura de archivos
-
 ```text
 MYO-FPGA/
 ├── README.md
@@ -88,14 +85,6 @@ MYO-FPGA/
 └── respaldo_codigo_original.v
 ```
 
-| Salida | Módulo principal | Descripción y código desglosado |
-|---|---|---|
-| LCD 16×2 (4 bits) | [`Mod_LCD_F.v`](rtl/salidas/01_lcd/Mod_LCD_F.v) | [LCD: archivos y submódulos](documentacion/salidas/01_lcd.md) |
-| Servo PWM | [`Cont_Srv_Con.v`](rtl/salidas/02_servomotor/Cont_Srv_Con.v) | [Servomotor: funcionamiento y código](documentacion/salidas/02_servomotor.md) |
-| Bluetooth / UART TX | [`Mod_Blue.v`](rtl/salidas/03_bluetooth/Mod_Blue.v) | [Bluetooth: siete módulos individuales](documentacion/salidas/03_bluetooth.md) |
-| Buzzer | [`Mod_Buzzer.v`](rtl/salidas/04_buzzer/Mod_Buzzer.v) | [Buzzer: funcionamiento y código](documentacion/salidas/04_buzzer.md) |
-
-También consulta [entradas y procesamiento](documentacion/entradas_y_procesamiento.md) y el [inventario de los 28 módulos](documentacion/listado_modulos.md).
 
 ### 3.3. Entradas, pulsadores y adquisición I²C
 
