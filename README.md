@@ -130,7 +130,7 @@ Archivo: [`Myo_Captura_Referencia.v`](Captura_Referencia.v). Registra `VlrMax` a
 
 #### 3.4.5. Cálculo del porcentaje de esfuerzo
 
-Archivo: [`Calculo_Porcentaje.v`](alculo_Porcentaje.v). Calcula la división entera:
+Archivo: [`Calculo_Porcentaje.v`](Calculo_Porcentajes.v). Calcula la división entera:
 
 ```text
 Porcentaje = (100 * DatoPrincipal) / VlrMax
